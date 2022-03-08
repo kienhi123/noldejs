@@ -1,42 +1,48 @@
-const http = require('http');
-const express = require('express')
+const express = require('express');
+
 const app = express();
 
-
-const check = (req,res,next)=>{
-    const startus =true;
-    if(startus){
-          console.log("Chào sếp")
-          next();
+// middleware
+const check = (req, res, next) => {
+    const status = true;
+    if(status) {
+    console.log("Chào sếp");
+    next();
     } else {
-        console.log("Anh không có quyền truy cập")
+        console.log("Anh không có quyền truy cập");
     }
-}
-app.get('/api/products',check,(req,res)=>{
-    const procts= [
-        {id:1,name:"Prodcuts A"},
-        {id:2,name:"Prodcuts B"}
+ }
+
+ app.get('/api/products', check, (req, res) => {
+    const products = [
+        {id: 1, name: "Product A"},
+        {id: 2, name: "Product B"}
     ];
-    res.json(procts);
-})
-// const server= http.createServer((req,res)=>{
-    
-//      if(req.url==="/"){
-//         res.setHeader('Content-Type','text/html');
-//         res.write("<h1>Home page</h1>")
-//         res.end()
-//      }else if(req.url==='/api/products'){
-//           const produts= [
-//               {id:1,name:"products A"},
-//               {id:2,name:"products B"}
-// ,
-//           ];
-//           res.end(JSON.stringify(produts));
-//      }else{
-//          console.log('Chịu không biết');
-//      }
+    res.json(products);
+ })
+    // app.use(check);
+    // app.use((rep, res) => {
+    //     console.log('Bước 2');
+    // })
+
+// const server = http.createServer((req, res) => {
+//     console.log('url', req.url);
+//     if(req.url === "/") {
+//         res.setHeader('Content-Type', "text/html");
+//         res.write("<html><body><h1>Home Page</h1></body></html>")
+//         res.end();
+//     } else if (req.url === "/api/products"){
+//         const products = [
+//             {id: 1, name: "Product A"},
+//             {id: 2, name: "Product B"}
+//         ];
+//         res.end(JSON.stringify(products));
+//     }else{
+//         console.log('Em không biết')
+//     }
 // });
+
 const PORT = 3001;
-server.listen(PORT,()=>{
-    console.log("server is running port",PORT);
+app.listen(PORT, () => {
+    console.log("Server is running port" , PORT)
 })
