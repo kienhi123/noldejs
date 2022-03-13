@@ -10,11 +10,11 @@ export const list = (req,res)=>{
 }
 
 export const read = (req,res)=>{
-    res.json(products);
-    res.json(products.find(item => item.id == +req.params.id));
+    
+    res.json(products.find(item => item.id === +req.params.id));
 }
-
-export const create =  async(req,res)=>{
+// API thêm sản phẩm
+export const create =  async (req,res)=>{
     try {
         const product = await new Product(req.body).save()
         res.json(product)

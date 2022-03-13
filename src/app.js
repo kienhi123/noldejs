@@ -1,7 +1,6 @@
 import express  from "express";
 import cors from"cors";
 import morgan from 'morgan';
-
 import mongoose from "mongoose";
 import productRoute from '../router/home'
 const app = express();
