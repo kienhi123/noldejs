@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
-// 1 Khởi tạo model
 const Product = mongoose.model('Product', { name: String ,price:Number,desc:String});
+const Blog = mongoose.model('Blog', { name: String ,desc:String,img:String});
 
-// API thêm sản phẩm
 export const create = async (req, res) => {
     try {
         const product = await new Product(req.body).save();
@@ -13,7 +12,28 @@ export const create = async (req, res) => {
         })
     }
 }
+export const addblog = async (req, res) => {
+    try {
+        const blog = await new Blog(req.body).save();
+        res.json(blog)    
+    } catch (error) {
+        res.status(400).json({
+            message: "Không thêm được sản phẩm anh ei"
+        })
+    }
+}
 // API list sản phẩm
+export const listblog = async (req, res) => { 
+    try {
+        const blog = await Blog.find();
+        res.json(blog);
+    } catch (error) {
+        res.status(400).json({
+            message: "Lỗi không tìm được sản phẩm"
+        })
+    }
+}
+// list blog
 export const list = async (req, res) => { 
     try {
         const products = await Product.find();
