@@ -18,7 +18,7 @@ export const addblog = async (req, res) => {
         res.json(blog)    
     } catch (error) {
         res.status(400).json({
-            message: "Không thêm được sản phẩm anh ei"
+            message: "Không thêm được bài viết"
         })
     }
 }
