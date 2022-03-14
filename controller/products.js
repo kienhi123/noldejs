@@ -8,7 +8,7 @@ export const create = async (req, res) => {
         res.json(product)    
     } catch (error) {
         res.status(400).json({
-            message: "Không thêm được sản phẩm anh ei"
+            message: "Không thêm được sản phẩm "
         })
     }
 }
@@ -18,7 +18,7 @@ export const addblog = async (req, res) => {
         res.json(blog)    
     } catch (error) {
         res.status(400).json({
-            message: "Không thêm được bài viết"
+            message: "Không thêm được bài viêt"
         })
     }
 }
@@ -29,7 +29,7 @@ export const listblog = async (req, res) => {
         res.json(blog);
     } catch (error) {
         res.status(400).json({
-            message: "Lỗi không tìm được sản phẩm"
+            message: "Lỗi không tìm được bài viết"
         })
     }
 }
