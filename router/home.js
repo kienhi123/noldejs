@@ -1,12 +1,11 @@
 import { Router } from 'express';
-import { addblog, create, list,  listblog,  read, remove, update } from '../controller/products';
+import {  adduser, create,   list,   read, remove, update } from '../controller/products';
 import { checkAuth } from '../middeawe/checkAuth' 
 const router = Router();
 
 // resful API
+router.post('/user', checkAuth, adduser);
 router.get('/products', checkAuth, list);
-router.post('/blog', checkAuth, addblog);
-router.get('/listblog', checkAuth, listblog);
 router.get('/product/:id', checkAuth, read);
 router.post('/products', checkAuth, create);
 router.delete('/product/:id', checkAuth, remove);

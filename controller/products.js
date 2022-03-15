@@ -1,7 +1,6 @@
-import mongoose from "mongoose";
-const Product = mongoose.model('Product', { name: String ,price:Number,desc:String});
-const Blog = mongoose.model('Blog', { name: String ,desc:String,img:String});
-
+import Product from "../model/model";
+import User from "../model/user"
+// thêm sản phẩm
 export const create = async (req, res) => {
     try {
         const product = await new Product(req.body).save();
@@ -12,28 +11,21 @@ export const create = async (req, res) => {
         })
     }
 }
-export const addblog = async (req, res) => {
+
+export const adduser = async (req, res) => {
     try {
-        const blog = await new Blog(req.body).save();
-        res.json(blog)    
+        const user = await User(req.body).save();
+        res.json(user)    
     } catch (error) {
         res.status(400).json({
-            message: "Không thêm được bài viêt"
+            message: "Không thêm được tài khoản "
         })
     }
 }
+
 // API list sản phẩm
-export const listblog = async (req, res) => { 
-    try {
-        const blog = await Blog.find();
-        res.json(blog);
-    } catch (error) {
-        res.status(400).json({
-            message: "Lỗi không tìm được bài viết"
-        })
-    }
-}
-// list blog
+
+
 export const list = async (req, res) => { 
     try {
         const products = await Product.find();
@@ -58,12 +50,12 @@ export const read = async (req, res) => {
 }
 // xóa sản phẩm
 export const remove = async (req, res) => {
-    const conditon = {_id:req.params.id}
+    const filter = {_id:req.params.id}
     try {
-        const product = await Product.findOneAndDelete(conditon);
+        const products = await Product.findByIdAndDelete(filter);
         res.json({
             message:"Đã xóa thành công",
-           
+            data:product
         });
     } catch (error) {
         res.status(400).json({
