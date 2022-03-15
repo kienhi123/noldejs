@@ -44,13 +44,44 @@ export const list = async (req, res) => {
         })
     }
 }
-export const read = (req, res) => {
-    res.json(products.find(item => item.id === +req.params.id));
+// chi tiết sản phẩm
+export const read = async (req, res) => {
+    const filter = {_id:req.params.id}
+    try {
+        const products = await Product.findOne(filter);
+        res.json(products);
+    } catch (error) {
+        res.status(400).json({
+            message: "Không hiển thị được sản phẩm"
+        })
+    }
 }
-
-export const remove = (req, res) => {
-    res.json(products.filter(item => item.id !== +req.params.id));
+// xóa sản phẩm
+export const remove = async (req, res) => {
+    const conditon = {_id:req.params.id}
+   
+    try {
+        const products = await Product.findByIdAndDelete(conditon);
+        res.json({
+            message:"Đã xóa thành công",
+            data:product
+        });
+    } catch (error) {
+        res.status(400).json({
+            message: "Không hiển thị được sản phẩm"
+        })
+    }
 }
 export const update = (req, res) => {
-    res.json(products.map(item => item.id == req.params.id ? req.body : item));
+    const conditon = {_id:req.params.id}
+    const doc = req.body
+    const option = {new:true}
+    try {
+        const products = await Product.findByIdAndUpdate(conditon,doc,option);
+        res.json  (products);
+    } catch (error) {
+        res.status(400).json({
+            message: "Không hiển thị được sản phẩm"
+        })
+    }
 }
