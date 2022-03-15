@@ -59,12 +59,11 @@ export const read = async (req, res) => {
 // xóa sản phẩm
 export const remove = async (req, res) => {
     const conditon = {_id:req.params.id}
-   
     try {
-        const products = await Product.findByIdAndDelete(conditon);
+        const product = await Product.findOneAndDelete(conditon);
         res.json({
             message:"Đã xóa thành công",
-            data:product
+           
         });
     } catch (error) {
         res.status(400).json({
@@ -72,7 +71,7 @@ export const remove = async (req, res) => {
         })
     }
 }
-export const update = (req, res) => {
+export const update = async (req, res) => {
     const conditon = {_id:req.params.id}
     const doc = req.body
     const option = {new:true}
