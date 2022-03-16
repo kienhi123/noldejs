@@ -19,9 +19,11 @@ app.use("/api",productRoute);
 mongoose.connect('mongodb://localhost:27017/we16309')
     .then(() => console.log("Kết nối db thành công"))
     .catch((error) => console.log(error));
-    
+   app.get('/',(req,res,next)=>{
+       res.json('Home')
+   }) 
 // connection
-const PORT = 3001;
+const PORT = 2002;
 app.listen(PORT, () => {
     console.log("Server is running port", PORT);
 })
