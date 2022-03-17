@@ -11,7 +11,7 @@ export const create = async (req, res) => {
         })
     }
 }
-// Thêm user
+// Sinup
 export const signup = async (req, res) => {
     try {
         const user = await User(req.body).save();
@@ -25,10 +25,11 @@ export const signup = async (req, res) => {
     }
 }
 // login
-export const signin = (req, res,next) => {
+export const signin = (req, res) => {
+    // lấy dữ liệu gửi lên
     const countEmail = req.body.email
     const countPassword = req.body.password
-
+ // kiểm tra xem dữ liệu đã có trong database chưa
     User.findOne({
       email:countEmail,
       password:countPassword
@@ -54,8 +55,8 @@ export const signin = (req, res,next) => {
 
 export const list = async (req, res) => { 
     try {
-        const products = await User.find();
-        res.json(products);
+        const products = await Product.find().sort({createAt: -1});
+                res.json(products);
     } catch (error) {
         res.status(400).json({
             message: "Lỗi không tìm được sản phẩm"
