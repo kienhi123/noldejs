@@ -11,44 +11,40 @@ export const create = async (req, res) => {
         })
     }
 }
-// Sinup
-export const signup = async (req, res) => {
-    try {
-        const user = await User(req.body).save();
-        res.json({
-                     message:"Đã thêm tài khoản thành công",
-        data:user})
-    } catch (error) {
-        res.status(400).json({
-            message: "Không thêm được tài khoản "
-        })
-    }
-}
+// // Sinup
+// export const signup = async (req, res) => {
+//     try {
+//         const user = await User(req.body).save();
+//         res.json({
+//                      message:"Đã thêm tài khoản thành công",
+//         data:user})
+//     } catch (error) {
+//         res.status(400).json({
+//             message: "Không thêm được tài khoản "
+//         })
+//     }
+// }
 // login
-export const signin = (req, res) => {
-    // lấy dữ liệu gửi lên
-    const countEmail = req.body.email
-    const countPassword = req.body.password
- // kiểm tra xem dữ liệu đã có trong database chưa
-    User.findOne({
-      email:countEmail,
-      password:countPassword
-    })
-    .then(data=>{
-          if(data){
-                res.json('Đăng nhập thành công')
-          }  else{
-            res.status(300).json('Sai thông tin tài khoản')
-          }
-    })
-    .catch(err=>{
-         res.status(500).json('Lỗi server')
-    })
-
-     
-  
-  
-}
+// export const signin = (req, res) => {
+//     // lấy dữ liệu gửi lên
+//     const countEmail = req.body.email
+//     const countPassword = req.body.password
+//  // kiểm tra xem dữ liệu đã có trong database chưa
+//     User.findOne({
+//       email:countEmail,
+//       password:countPassword
+//     })
+//     .then(data=>{
+//           if(data){
+//                 res.json('Đăng nhập thành công')
+//           }  else{
+//             res.status(400).json('Sai thông tin tài khoản')
+//           }
+//     })
+//     .catch(err=>{
+//          res.status(500).json('Lỗi server')
+//     })
+// }
 
 // API list sản phẩm
 

@@ -1,8 +1,17 @@
 import mongoose ,{Schema} from "mongoose";
-const productUser = new Schema({
+import {createHmac} from 'crypto'
+
+
+
+const userSchema = new Schema({
+    name:{
+        type:String,
+        maxlength:30,
+        required:true
+    },
+   
     email:{
         type:String,
-        minLength:5,
         required:true
     },
     password:{
@@ -10,4 +19,24 @@ const productUser = new Schema({
         required:true
     }
 },{timestamps:true});
-export default mongoose.model('User', productUser);
+
+
+userSchema.methods = {
+    encryPassword(password){
+        if(!password) return
+
+        try {
+            return createHmac("sha256","abcs").update(password).digest("hex");
+        } catch (error) {
+            console.log(error)
+        }
+    } 
+}
+// Trước khi execute .save() thì chạy middlearve sau
+
+userSchema.pre("save",function(next){
+    this.password = this.encryPassword(this.password);
+    next();
+})
+
+export default mongoose.model('User', userSchema);

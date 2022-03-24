@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 
 import productRoute from '../router/home';
 import categoryRoute from '../router/category';
+import userRoute from '../router/checkAuth'
 const app = express();
 
 // middleware
@@ -16,6 +17,7 @@ app.use(express.json())
 app.use("/api",productRoute);
 app.use("/api",categoryRoute);
 
+app.use("/api",userRoute);
 
 // connnect database
 mongoose.connect('mongodb://localhost:27017/we16309')
@@ -25,7 +27,7 @@ mongoose.connect('mongodb://localhost:27017/we16309')
        res.json('Home')
    }) 
 // connection
-const PORT = 2002;
+const PORT = 2222;
 app.listen(PORT, () => {
     console.log("Server is running port", PORT);
 })
