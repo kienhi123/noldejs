@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import { create,   list,   listUser,   read, remove, signin, signup, update } from '../controller/products';
-import { checkAuth } from '../middeawe/checkAuth' 
+import {    create, list,read, remove, search, searh, update } from '../controller/products';
+import { userById } from '../controller/user';
+import { checkAuth,isAdmin, isAuth, requireSignin} from '../middeawe/checkAuth' 
 const router = Router();
 
 // resful API
@@ -8,10 +9,11 @@ const router = Router();
 // router.post('/signin', checkAuth,signin);
 
 router.get('/products', checkAuth, list);
-router.get('/listuser', checkAuth, listUser);
 router.get('/products/:id', checkAuth, read);
-router.post('/products', checkAuth, create);
-router.delete('/product/:id', checkAuth, remove);
-router.patch("/product/:id", checkAuth, update )
+router.post('/products/:userId',requireSignin,isAuth,isAdmin,create);
+router.delete('/products/:id/:userId',requireSignin,isAuth,isAdmin, remove);
+router.put('/products/:id/:userId', requireSignin,isAuth,isAdmin, update )
+router.post('/search',search);
 
+router.param("userId",userById);
 export default router;

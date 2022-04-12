@@ -26,7 +26,11 @@
   },
   "dependencies": {
     "express": "^4.17.3",
+    "express-jwt": "^6.1.1",
+    "json": "^11.0.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.6",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "server": "^1.0.37"
   }
 }

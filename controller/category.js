@@ -19,7 +19,17 @@ export const read = async (req,res)=>{
             category,
             products
         })
+    } catch (error) {    
+    }
+}
+// Danh sách danh mục
+export const list = async (req, res) => { 
+    try {
+        const category = await Category.find().sort({createAt: -1});
+                res.json(category);
     } catch (error) {
-        
+        res.status(400).json({
+            message: "Lỗi không tìm được danh mục"
+        })
     }
 }

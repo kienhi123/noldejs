@@ -9,10 +9,18 @@ const productSchema = new Schema({
         type:Number,
         required:true
     },
+    img:{
+        type:String
+    },
+    desc:{
+        type:String
+    
+    },
     category: {
         type: ObjectId,
         ref: "Category"
     }
     
 },{timestamps:true});
+productSchema.index({'$**':'text'})
 export default mongoose.model('Product', productSchema);
